@@ -1,4 +1,5 @@
 @echo off
+REM 改行コードをWindows形式に変更
 setlocal enabledelayedexpansion
 
 REM モデルディレクトリの基本パスを実行ディレクトリのmodelsサブディレクトリに設定
@@ -104,6 +105,72 @@ for %%f in (%FILES%) do (
     )
 )
 
+REM Loraモデルダウンロード
+set "MODEL_DIR=%dpath%\Lora"
+set "MODEL_ID=tori29umai/SDXL_shadow"
+set "FILES=anime03.safetensors"
+
+if not exist "%MODEL_DIR%" mkdir "%MODEL_DIR%"
+for %%f in (%FILES%) do (
+    set "FILE_PATH=%MODEL_DIR%\%%f"
+    if not exist "!FILE_PATH!" (
+        curl -L "https://huggingface.co/%MODEL_ID%/resolve/main/%%f" -o "!FILE_PATH!"
+        echo Downloaded %%f
+    ) else (
+        echo %%f already exists.
+    )
+)
+
+REM Loraモデルダウンロード
+set "MODEL_DIR=%dpath%\Lora"
+set "MODEL_ID=tori29umai/flat_color"
+set "FILES=SDXL_baketu2.safetensors"
+
+if not exist "%MODEL_DIR%" mkdir "%MODEL_DIR%"
+for %%f in (%FILES%) do (
+    set "FILE_PATH=%MODEL_DIR%\%%f"
+    if not exist "!FILE_PATH!" (
+        curl -L "https://huggingface.co/%MODEL_ID%/resolve/main/%%f" -o "!FILE_PATH!"
+        echo Downloaded %%f
+    ) else (
+        echo %%f already exists.
+    )
+)
+
+
+
+
+REM ControlNetモデルダウンロード
+set "MODEL_DIR=%dpath%\ControlNet"
+set "MODEL_ID=2vXpSwA7/iroiro-lora"
+set "FILES=CN-anytest_v3-50000_am_dim256.safetensors"
+
+if not exist "%MODEL_DIR%" mkdir "%MODEL_DIR%"
+for %%f in (%FILES%) do (
+    set "FILE_PATH=%MODEL_DIR%\%%f"
+    if not exist "!FILE_PATH!" (
+        curl -L "https://huggingface.co/%MODEL_ID%/resolve/main/test_controlnet2/%%f" -o "!FILE_PATH!"
+        echo Downloaded %%f
+    ) else (
+        echo %%f already exists.
+    )
+)
+
+REM ControlNetモデルダウンロード
+set "MODEL_DIR=%dpath%\ControlNet"
+set "MODEL_ID=2vXpSwA7/iroiro-lora"
+set "FILES=CN-anytest_v4-marged_am_dim256.safetensors"
+
+if not exist "%MODEL_DIR%" mkdir "%MODEL_DIR%"
+for %%f in (%FILES%) do (
+    set "FILE_PATH=%MODEL_DIR%\%%f"
+    if not exist "!FILE_PATH!" (
+        curl -L "https://huggingface.co/%MODEL_ID%/resolve/main/test_controlnet2/%%f" -o "!FILE_PATH!"
+        echo Downloaded %%f
+    ) else (
+        echo %%f already exists.
+    )
+)
 
 
 REM ControlNetモデルダウンロード
